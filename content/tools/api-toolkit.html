@@ -1,0 +1,126 @@
+<!-- Web Content: API Toolkit - Available Services -->
+<link rel="stylesheet" href="https://unpkg.com/@carbon/styles@1/css/styles.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+<style>
+.art { font-family: 'IBM Plex Sans', sans-serif; background: #161616; color: #f4f4f4; padding: 3rem 2rem; max-width: 800px; margin: 0 auto; }
+.art h1 { font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
+.art .meta { color: #6f6f6f; font-size: 0.8rem; margin-bottom: 2rem; }
+.art h2 { font-size: 1.25rem; font-weight: 600; margin: 2rem 0 0.75rem; color: #42be65; }
+.art p { color: #c6c6c6; line-height: 1.7; margin-bottom: 1rem; font-size: 0.9rem; }
+.art code { font-family: 'IBM Plex Mono', monospace; background: #262626; padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.8rem; }
+.art pre { background: #262626; border-left: 3px solid #42be65; padding: 1.25rem; margin: 1rem 0; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; line-height: 1.6; color: #c6c6c6; border-radius: 0 4px 4px 0; }
+.art table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.8rem; }
+.art th { background: #262626; padding: 0.75rem; text-align: left; border-bottom: 1px solid #393939; color: #f4f4f4; }
+.art td { padding: 0.75rem; border-bottom: 1px solid #262626; color: #c6c6c6; }
+.art .live { color: #42be65; }
+.ph-tag { display: inline-block; padding: 0.125rem 0.5rem; background: #19853620; border-radius: 999px; color: #42be65; font-size: 0.7rem; margin-right: 0.25rem; }
+</style>
+
+<div class="art">
+  <span class="ph-tag">Tools</span> <span class="ph-tag">API Reference</span> <span class="ph-tag">Live Services</span>
+  <h1>API Toolkit</h1>
+  <p class="meta">AgentNXXT Hub &middot; Updated March 2026 &middot; Quick reference</p>
+
+  <p>All live APIs available in the AgentNXXT infrastructure. Use these endpoints in your agents, workflows, and applications.</p>
+
+  <h2>LLM Gateway (LiteLLM)</h2>
+  <table>
+    <tr><th>Property</th><th>Value</th></tr>
+    <tr><td>URL</td><td><code class="live">https://llmgateway.agnxxt.com:4000</code></td></tr>
+    <tr><td>Protocol</td><td>OpenAI-compatible REST API</td></tr>
+    <tr><td>Auth</td><td>Bearer token (master key)</td></tr>
+    <tr><td>Models</td><td>OpenAI, Anthropic, Voyage, and custom</td></tr>
+  </table>
+  <pre># Chat completion
+curl https://llmgateway.agnxxt.com:4000/v1/chat/completions \
+  -H "Authorization: Bearer $LITELLM_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "gpt-4o", "messages": [{"role": "user", "content": "Hello"}]}'</pre>
+
+  <h2>Translation (LibreTranslate)</h2>
+  <table>
+    <tr><th>Property</th><th>Value</th></tr>
+    <tr><td>URL</td><td><code class="live">http://72.61.244.208:5555</code></td></tr>
+    <tr><td>Languages</td><td>en, es, fr, de, pt, ar, zh, ja, ko, hi, ru</td></tr>
+    <tr><td>Auth</td><td>None required</td></tr>
+  </table>
+  <pre># Translate text
+curl -X POST http://72.61.244.208:5555/translate \
+  -H "Content-Type: application/json" \
+  -d '{"q": "Hello world", "source": "en", "target": "es"}'
+
+# Response: {"translatedText": "Hola mundo"}</pre>
+
+  <h2>PDF Generation (Gotenberg)</h2>
+  <table>
+    <tr><th>Property</th><th>Value</th></tr>
+    <tr><td>URL</td><td><code class="live">http://72.61.244.208:3100</code></td></tr>
+    <tr><td>Formats</td><td>HTML to PDF, Office to PDF, URL to PDF</td></tr>
+    <tr><td>Auth</td><td>None required</td></tr>
+  </table>
+  <pre># HTML to PDF
+curl -X POST http://72.61.244.208:3100/forms/chromium/convert/html \
+  -F "files=@index.html" -o output.pdf
+
+# URL to PDF
+curl -X POST http://72.61.244.208:3100/forms/chromium/convert/url \
+  -F "url=https://example.com" -o output.pdf</pre>
+
+  <h2>File Conversion (ConvertX)</h2>
+  <table>
+    <tr><th>Property</th><th>Value</th></tr>
+    <tr><td>URL</td><td><code class="live">http://72.61.244.208:3200</code></td></tr>
+    <tr><td>Formats</td><td>100+ document, image, audio, video formats</td></tr>
+    <tr><td>Auth</td><td>JWT (auto-generated)</td></tr>
+  </table>
+
+  <h2>Image Processing (ImgProxy)</h2>
+  <table>
+    <tr><th>Property</th><th>Value</th></tr>
+    <tr><td>URL</td><td><code class="live">http://72.61.244.208:8888</code></td></tr>
+    <tr><td>Operations</td><td>Resize, crop, rotate, watermark, format convert</td></tr>
+    <tr><td>Auth</td><td>HMAC signature (key + salt)</td></tr>
+  </table>
+  <pre># Resize an image to 300x200
+http://72.61.244.208:8888/insecure/rs:fit:300:200/plain/https://example.com/image.jpg</pre>
+
+  <h2>Observability (Langfuse)</h2>
+  <table>
+    <tr><th>Property</th><th>Value</th></tr>
+    <tr><td>URL</td><td><code class="live">http://72.61.244.208:3003</code></td></tr>
+    <tr><td>Features</td><td>Traces, evals, prompt management, datasets</td></tr>
+    <tr><td>SDKs</td><td>Python, TypeScript, OpenAI drop-in</td></tr>
+  </table>
+  <pre># Python SDK
+from langfuse import Langfuse
+langfuse = Langfuse(
+    host="http://72.61.244.208:3003",
+    public_key="pk-...",
+    secret_key="sk-..."
+)
+trace = langfuse.trace(name="my-agent")</pre>
+
+  <h2>Authentication (Logto SSO)</h2>
+  <table>
+    <tr><th>Property</th><th>Value</th></tr>
+    <tr><td>URL</td><td><code class="live">https://auth.agnxxt.com</code></td></tr>
+    <tr><td>Admin</td><td><code class="live">https://authadmin.agnxxt.com</code></td></tr>
+    <tr><td>Protocols</td><td>OIDC, OAuth 2.0, SAML</td></tr>
+  </table>
+
+  <h2>MCP Gateway</h2>
+  <table>
+    <tr><th>Property</th><th>Value</th></tr>
+    <tr><td>URL</td><td><code class="live">https://mcpgateway.agnxxt.com:12008</code></td></tr>
+    <tr><td>Protocol</td><td>Model Context Protocol (MCP)</td></tr>
+    <tr><td>Use case</td><td>Connect AI tools and services via standard protocol</td></tr>
+  </table>
+
+  <h2>Workflow Automation (n8n)</h2>
+  <table>
+    <tr><th>Property</th><th>Value</th></tr>
+    <tr><td>URL</td><td><code class="live">https://apigateway.agnxxt.com:5678</code></td></tr>
+    <tr><td>Nodes</td><td>400+ integrations</td></tr>
+    <tr><td>Workers</td><td>Distributed queue with Redis</td></tr>
+  </table>
+</div>

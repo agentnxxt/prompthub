@@ -1,0 +1,186 @@
+<!-- Web Content: Building Agent Skills Guide -->
+<link rel="stylesheet" href="https://unpkg.com/@carbon/styles@1/css/styles.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+<style>
+.art { font-family: 'IBM Plex Sans', sans-serif; background: #161616; color: #f4f4f4; padding: 3rem 2rem; max-width: 800px; margin: 0 auto; }
+.art h1 { font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
+.art .meta { color: #6f6f6f; font-size: 0.8rem; margin-bottom: 2rem; }
+.art h2 { font-size: 1.25rem; font-weight: 600; margin: 2rem 0 0.75rem; color: #3ddbd9; }
+.art h3 { font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+.art p { color: #c6c6c6; line-height: 1.7; margin-bottom: 1rem; font-size: 0.9rem; }
+.art ul, .art ol { color: #c6c6c6; padding-left: 1.5rem; margin-bottom: 1rem; }
+.art li { margin-bottom: 0.5rem; line-height: 1.5; font-size: 0.9rem; }
+.art code { font-family: 'IBM Plex Mono', monospace; background: #262626; padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.8rem; }
+.art pre { background: #262626; border-left: 3px solid #3ddbd9; padding: 1.25rem; margin: 1rem 0; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; line-height: 1.6; color: #c6c6c6; border-radius: 0 4px 4px 0; }
+.art .tip { background: #262626; border-left: 3px solid #42be65; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.art .tip strong { color: #42be65; }
+.art table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.8rem; }
+.art th { background: #262626; padding: 0.75rem; text-align: left; border-bottom: 1px solid #393939; color: #f4f4f4; }
+.art td { padding: 0.75rem; border-bottom: 1px solid #262626; color: #c6c6c6; }
+.ph-tag { display: inline-block; padding: 0.125rem 0.5rem; background: #00539a20; border-radius: 999px; color: #3ddbd9; font-size: 0.7rem; margin-right: 0.25rem; }
+</style>
+
+<div class="art">
+  <span class="ph-tag">Skills</span> <span class="ph-tag">Guide</span> <span class="ph-tag">SKILL.md</span>
+  <h1>Building Agent Skills</h1>
+  <p class="meta">AgentNXXT Hub &middot; Updated March 2026 &middot; 10 min read</p>
+
+  <p>Agent skills are modular capability packages that give AI coding agents new abilities on demand. Instead of baking everything into a system prompt, skills load dynamically when needed &mdash; keeping the agent focused and context-efficient.</p>
+
+  <h2>1. What is a SKILL.md?</h2>
+
+  <p>A SKILL.md file is the standard format for defining agent skills. It consists of two parts:</p>
+
+  <ol>
+    <li><strong>YAML frontmatter</strong> &mdash; Metadata that tells the agent when to activate the skill</li>
+    <li><strong>Markdown body</strong> &mdash; Instructions the agent follows when the skill is invoked</li>
+  </ol>
+
+  <pre>---
+name: deploy-to-coolify
+description: Deploy applications to a Coolify instance
+triggers:
+  - deploy to coolify
+  - spin up a service
+  - launch on coolify
+---
+
+# Deploy to Coolify
+
+You are a deployment agent that deploys applications
+to a Coolify instance.
+
+## Prerequisites
+Before deploying, you need:
+1. Coolify API URL
+2. Coolify API Token
+3. Server UUID
+
+## Workflow
+1. Validate inputs
+2. Create the service via Coolify API
+3. Start the service
+4. Verify health</pre>
+
+  <h2>2. Skill Anatomy</h2>
+
+  <table>
+    <tr><th>Component</th><th>Purpose</th><th>Required</th></tr>
+    <tr><td><code>name</code></td><td>Unique identifier, used as the slash command</td><td>Yes</td></tr>
+    <tr><td><code>description</code></td><td>One-line summary for the agent to decide relevance</td><td>Yes</td></tr>
+    <tr><td><code>triggers</code></td><td>Natural language phrases that activate the skill</td><td>Recommended</td></tr>
+    <tr><td>Markdown body</td><td>Full instructions, templates, examples</td><td>Yes</td></tr>
+  </table>
+
+  <h2>3. Writing Effective Skill Instructions</h2>
+
+  <p>Skill instructions should be written as if you're briefing a skilled engineer on a task they haven't done before:</p>
+
+  <ul>
+    <li><strong>Be procedural</strong> &mdash; Numbered steps, not paragraphs of prose</li>
+    <li><strong>Include templates</strong> &mdash; Provide exact API calls, config formats, code snippets</li>
+    <li><strong>Handle errors</strong> &mdash; Tell the agent what to do when things go wrong</li>
+    <li><strong>Set boundaries</strong> &mdash; What the skill should NOT do</li>
+    <li><strong>Include verification</strong> &mdash; How to confirm the task succeeded</li>
+  </ul>
+
+  <h2>4. Skill Types</h2>
+
+  <h3>Code Generation Skills</h3>
+  <p>Generate boilerplate, scaffold projects, create configs. These skills include templates and patterns.</p>
+  <pre>## Template
+When creating a new API endpoint:
+1. Create handler at /api/v1/{resource}
+2. Add route to router.go
+3. Write request/response types
+4. Add validation middleware
+5. Write tests</pre>
+
+  <h3>Operational Skills</h3>
+  <p>Deploy, monitor, debug. These skills make API calls and parse responses.</p>
+  <pre>## Deployment Steps
+1. Call POST /api/v1/services with compose
+2. Poll GET /api/v1/services/{uuid} until healthy
+3. If unhealthy after 5 min, check logs
+4. Report URL and status to user</pre>
+
+  <h3>Analysis Skills</h3>
+  <p>Review code, audit configs, assess risk. These skills define criteria and scoring.</p>
+  <pre>## Review Criteria
+- Security: Check for injection, auth bypass, secrets
+- Performance: N+1 queries, missing indexes, blocking
+- Style: Naming conventions, dead code, complexity</pre>
+
+  <h3>Research Skills</h3>
+  <p>Search, compare, summarize. These skills define sources and output formats.</p>
+
+  <h2>5. CrewAI Skills (Python)</h2>
+
+  <p>For agent frameworks like CrewAI, skills are Python classes that extend <code>BaseTool</code>:</p>
+
+  <pre>from crewai.tools import BaseTool
+from pydantic import BaseModel, Field
+
+class SearchInput(BaseModel):
+    query: str = Field(description="Search query")
+
+class WebSearchTool(BaseTool):
+    name: str = "web_search"
+    description: str = "Search the web for information"
+    args_schema: type[BaseModel] = SearchInput
+
+    def _run(self, query: str) -> str:
+        # Implementation here
+        return results</pre>
+
+  <div class="tip">
+    <strong>Tip:</strong> The <code>description</code> field is critical &mdash; the agent uses it to decide when to invoke the tool. Make it specific about what the tool does and what kind of input it expects.
+  </div>
+
+  <h2>6. Langflow Skills (Components)</h2>
+
+  <p>In Langflow, skills are custom components that you drop into flows:</p>
+
+  <pre>from langflow.custom import Component
+from langflow.io import MessageTextInput, Output
+
+class PromptLibrary(Component):
+    display_name = "Prompt Library"
+    description = "Fetch prompts from the library"
+
+    inputs = [
+        MessageTextInput(
+            name="category",
+            display_name="Category",
+            info="prompts, skills, tools, agents"
+        ),
+    ]
+
+    outputs = [
+        Output(display_name="Prompts", name="output",
+               method="fetch_prompts"),
+    ]
+
+    def fetch_prompts(self) -> str:
+        category = self.category
+        # Fetch from your prompt store
+        return prompts</pre>
+
+  <h2>7. Compatibility Matrix</h2>
+
+  <table>
+    <tr><th>Format</th><th>Claude Code</th><th>Codex</th><th>Gemini CLI</th><th>CrewAI</th><th>Langflow</th></tr>
+    <tr><td>SKILL.md</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&mdash;</td><td>&mdash;</td></tr>
+    <tr><td>Python BaseTool</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&#9989;</td><td>&#9989;</td></tr>
+    <tr><td>OpenAPI spec</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td></tr>
+    <tr><td>MCP server</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&mdash;</td><td>&mdash;</td></tr>
+  </table>
+
+  <h2>Resources</h2>
+  <ul>
+    <li><a href="https://github.com/OpenSaaSApps/skills" style="color:#3ddbd9">Anthropic Official Skills</a></li>
+    <li><a href="https://github.com/OpenSaaSApps/awesome-agent-skills" style="color:#3ddbd9">500+ Agent Skills (VoltAgent)</a></li>
+    <li><a href="https://github.com/agentnxxt/agent-skills" style="color:#3ddbd9">AgentNXXT Custom Skills</a></li>
+    <li><a href="https://code.claude.com/docs/en/skills" style="color:#3ddbd9">Claude Code Skills Docs</a></li>
+  </ul>
+</div>

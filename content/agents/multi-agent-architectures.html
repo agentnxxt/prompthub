@@ -1,0 +1,131 @@
+<!-- Web Content: Multi-Agent Architectures -->
+<link rel="stylesheet" href="https://unpkg.com/@carbon/styles@1/css/styles.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+<style>
+.art { font-family: 'IBM Plex Sans', sans-serif; background: #161616; color: #f4f4f4; padding: 3rem 2rem; max-width: 800px; margin: 0 auto; }
+.art h1 { font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
+.art .meta { color: #6f6f6f; font-size: 0.8rem; margin-bottom: 2rem; }
+.art h2 { font-size: 1.25rem; font-weight: 600; margin: 2rem 0 0.75rem; color: #ff832b; }
+.art h3 { font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+.art p { color: #c6c6c6; line-height: 1.7; margin-bottom: 1rem; font-size: 0.9rem; }
+.art ul { color: #c6c6c6; padding-left: 1.5rem; margin-bottom: 1rem; }
+.art li { margin-bottom: 0.5rem; line-height: 1.5; font-size: 0.9rem; }
+.art code { font-family: 'IBM Plex Mono', monospace; background: #262626; padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.8rem; }
+.art pre { background: #262626; border-left: 3px solid #ff832b; padding: 1.25rem; margin: 1rem 0; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; line-height: 1.6; color: #c6c6c6; border-radius: 0 4px 4px 0; }
+.art .pattern { background: #262626; border: 1px solid #393939; border-radius: 4px; padding: 1.5rem; margin: 1.5rem 0; }
+.art .pattern h3 { margin-top: 0; color: #ff832b; }
+.ph-tag { display: inline-block; padding: 0.125rem 0.5rem; background: #8a3c0020; border-radius: 999px; color: #ff832b; font-size: 0.7rem; margin-right: 0.25rem; }
+</style>
+
+<div class="art">
+  <span class="ph-tag">Agents</span> <span class="ph-tag">Architecture</span> <span class="ph-tag">Patterns</span>
+  <h1>Multi-Agent Architectures</h1>
+  <p class="meta">AgentNXXT Hub &middot; Updated March 2026 &middot; 12 min read</p>
+
+  <p>Single agents hit limits quickly &mdash; context windows fill up, tasks get complex, and reliability drops. Multi-agent systems split work across specialized agents that collaborate through defined protocols.</p>
+
+  <h2>1. Architecture Patterns</h2>
+
+  <div class="pattern">
+    <h3>Orchestrator Pattern</h3>
+    <p>A central coordinator delegates tasks to specialized worker agents and assembles results.</p>
+    <pre>Orchestrator
+  ├── Research Agent (search, summarize)
+  ├── Code Agent (write, review, test)
+  ├── Deploy Agent (build, ship, verify)
+  └── QA Agent (validate, report)</pre>
+    <p><strong>Best for:</strong> Complex workflows with clear task boundaries. Used by AgentKube.</p>
+    <p><strong>Tool:</strong> <a href="https://github.com/agentnxxt/agentkube" style="color:#ff832b">AgentKube</a></p>
+  </div>
+
+  <div class="pattern">
+    <h3>Crew Pattern</h3>
+    <p>Agents have roles, goals, and backstories. They collaborate on shared tasks with defined handoffs.</p>
+    <pre>Crew:
+  - Researcher (goal: find market data)
+  - Analyst (goal: identify trends)
+  - Writer (goal: produce report)
+
+Process: sequential
+  Researcher → Analyst → Writer</pre>
+    <p><strong>Best for:</strong> Business workflows where role separation matters.</p>
+    <p><strong>Tool:</strong> <a href="https://github.com/OpenSaaSApps/agentcrew" style="color:#ff832b">AgentCrew (CrewAI)</a></p>
+  </div>
+
+  <div class="pattern">
+    <h3>Flow Pattern</h3>
+    <p>Visual DAG of components where data flows between nodes. Each node can be an LLM call, tool, or conditional.</p>
+    <pre>Input → Prompt Template → LLM → Parser
+                                    ├── Route A → Tool 1 → Output
+                                    └── Route B → Tool 2 → Output</pre>
+    <p><strong>Best for:</strong> Rapid prototyping, visual debugging, non-technical team collaboration.</p>
+    <p><strong>Tool:</strong> <a href="https://agentflow.agnxxt.com:7860" style="color:#ff832b">AgentFlow (Langflow)</a></p>
+  </div>
+
+  <div class="pattern">
+    <h3>Autonomous Pattern</h3>
+    <p>Self-directed agent that plans, executes, and iterates until a goal is met. Minimal human oversight.</p>
+    <pre>Goal: "Analyze competitor pricing"
+  Plan:
+    1. Search for competitor websites
+    2. Extract pricing pages
+    3. Structure data into table
+    4. Compare with our pricing
+    5. Generate recommendations
+  Execute: [loops until complete]</pre>
+    <p><strong>Best for:</strong> Open-ended research, exploration tasks.</p>
+    <p><strong>Tool:</strong> <a href="https://github.com/OpenSaaSApps/agentgpt" style="color:#ff832b">AutoGPT</a></p>
+  </div>
+
+  <h2>2. Communication Protocols</h2>
+
+  <ul>
+    <li><strong>Direct messaging</strong> &mdash; Agent A calls Agent B's API directly. Simple but tightly coupled.</li>
+    <li><strong>Control plane routing</strong> &mdash; All messages go through AgentKube, which handles routing, auth, and logging.</li>
+    <li><strong>Event-driven</strong> &mdash; Agents publish/subscribe to events via n8n or Redis. Loosely coupled.</li>
+    <li><strong>MCP protocol</strong> &mdash; Standardized tool discovery and invocation via MCP Gateway.</li>
+  </ul>
+
+  <h2>3. Memory Strategies</h2>
+
+  <ul>
+    <li><strong>Shared memory</strong> &mdash; All agents read/write to a common store (Redis, vector DB)</li>
+    <li><strong>Scoped memory</strong> &mdash; AgentKube provides 4 levels: global, agent, session, run</li>
+    <li><strong>RAG memory</strong> &mdash; Agents query a vector store for relevant context before acting</li>
+    <li><strong>Conversation memory</strong> &mdash; Langfuse traces provide full execution history</li>
+  </ul>
+
+  <h2>4. AgentNXXT Stack for Multi-Agent Systems</h2>
+
+  <pre>┌─────────────────────────────────┐
+│         AgentFlow (UI)          │ Visual flow builder
+├─────────────────────────────────┤
+│     AgentKube (Control Plane)   │ Routing, auth, memory
+├──────────┬──────────┬───────────┤
+│ CrewAI   │ AutoGPT  │ Custom    │ Agent frameworks
+├──────────┴──────────┴───────────┤
+│     LLM Gateway (LiteLLM)      │ Model routing
+├─────────────────────────────────┤
+│     Langfuse (Observability)    │ Traces, evals, prompts
+├─────────────────────────────────┤
+│     Logto (Auth) │ MCP Gateway  │ Identity, tools
+└─────────────────────────────────┘</pre>
+
+  <h2>5. When to Use What</h2>
+
+  <ul>
+    <li><strong>Simple task, one agent</strong> &mdash; Just use a system prompt with tools. No framework needed.</li>
+    <li><strong>Sequential workflow</strong> &mdash; CrewAI with sequential process.</li>
+    <li><strong>Visual prototyping</strong> &mdash; Langflow. Build it visually first, then code it if needed.</li>
+    <li><strong>Production multi-agent</strong> &mdash; AgentKube for orchestration + any framework for agents.</li>
+    <li><strong>Autonomous exploration</strong> &mdash; AutoGPT for open-ended goals.</li>
+  </ul>
+
+  <h2>Resources</h2>
+  <ul>
+    <li><a href="https://github.com/agentnxxt/agentkube" style="color:#ff832b">AgentKube</a> &mdash; Control plane</li>
+    <li><a href="https://github.com/OpenSaaSApps/agentcrew" style="color:#ff832b">AgentCrew</a> &mdash; CrewAI framework</li>
+    <li><a href="https://github.com/OpenSaaSApps/awesome-ai-agents-2026" style="color:#ff832b">Agent Directory 2026</a> &mdash; 300+ resources</li>
+    <li><a href="https://github.com/agentnxxt/infra" style="color:#ff832b">Infrastructure Repo</a> &mdash; All deployment configs</li>
+  </ul>
+</div>

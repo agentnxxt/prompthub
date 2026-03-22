@@ -1,0 +1,158 @@
+<!-- Web Content: System Prompt Engineering Guide -->
+<link rel="stylesheet" href="https://unpkg.com/@carbon/styles@1/css/styles.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+<style>
+.art { font-family: 'IBM Plex Sans', sans-serif; background: #161616; color: #f4f4f4; padding: 3rem 2rem; max-width: 800px; margin: 0 auto; }
+.art h1 { font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
+.art .meta { color: #6f6f6f; font-size: 0.8rem; margin-bottom: 2rem; }
+.art h2 { font-size: 1.25rem; font-weight: 600; margin: 2rem 0 0.75rem; color: #78a9ff; }
+.art h3 { font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+.art p { color: #c6c6c6; line-height: 1.7; margin-bottom: 1rem; font-size: 0.9rem; }
+.art ul { color: #c6c6c6; padding-left: 1.5rem; margin-bottom: 1rem; }
+.art li { margin-bottom: 0.5rem; line-height: 1.5; font-size: 0.9rem; }
+.art code { font-family: 'IBM Plex Mono', monospace; background: #262626; padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.8rem; }
+.art pre { background: #262626; border-left: 3px solid #0f62fe; padding: 1.25rem; margin: 1rem 0; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; line-height: 1.6; color: #c6c6c6; border-radius: 0 4px 4px 0; }
+.art .tip { background: #262626; border-left: 3px solid #42be65; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.art .tip strong { color: #42be65; }
+.art .warn { background: #262626; border-left: 3px solid #ff832b; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+.art .warn strong { color: #ff832b; }
+.ph-tag { display: inline-block; padding: 0.125rem 0.5rem; background: #0f62fe20; border-radius: 999px; color: #78a9ff; font-size: 0.7rem; margin-right: 0.25rem; }
+</style>
+
+<div class="art">
+  <span class="ph-tag">Prompts</span> <span class="ph-tag">Guide</span> <span class="ph-tag">System Prompts</span>
+  <h1>System Prompt Engineering</h1>
+  <p class="meta">AgentNXXT Hub &middot; Updated March 2026 &middot; 8 min read</p>
+
+  <p>System prompts define how an AI agent behaves, what it knows, and what boundaries it operates within. A well-crafted system prompt is the difference between a generic chatbot and a reliable production agent.</p>
+
+  <h2>1. Structure of an Effective System Prompt</h2>
+
+  <p>Every production system prompt should address five concerns:</p>
+
+  <ul>
+    <li><strong>Identity</strong> &mdash; Who is the agent? What role does it play?</li>
+    <li><strong>Capabilities</strong> &mdash; What can it do? What tools does it have access to?</li>
+    <li><strong>Constraints</strong> &mdash; What should it never do? What are the guardrails?</li>
+    <li><strong>Output format</strong> &mdash; How should it respond? JSON, markdown, conversational?</li>
+    <li><strong>Context</strong> &mdash; What background knowledge does it need?</li>
+  </ul>
+
+  <pre>You are [ROLE] at [ORGANIZATION].
+
+Your job is to [PRIMARY TASK].
+
+You have access to these tools:
+- [TOOL 1]: [DESCRIPTION]
+- [TOOL 2]: [DESCRIPTION]
+
+Rules:
+- Always [BEHAVIOR 1]
+- Never [BEHAVIOR 2]
+- When uncertain, [FALLBACK BEHAVIOR]
+
+Respond in [FORMAT].</pre>
+
+  <h2>2. Identity Patterns</h2>
+
+  <p>The identity section sets the agent's persona and expertise level. Be specific about domain knowledge.</p>
+
+  <h3>Generic (weak)</h3>
+  <pre>You are a helpful AI assistant.</pre>
+
+  <h3>Specific (strong)</h3>
+  <pre>You are a senior DevOps engineer specializing in
+Kubernetes deployments. You have deep expertise in
+Helm charts, ArgoCD, and multi-cluster management.
+You work at a company running 200+ microservices
+across 3 cloud providers.</pre>
+
+  <div class="tip">
+    <strong>Tip:</strong> The more specific the identity, the more consistent the agent's behavior. Specificity reduces hallucination because the model has a narrower domain to reason about.
+  </div>
+
+  <h2>3. Constraint Engineering</h2>
+
+  <p>Constraints prevent the agent from going off-rails. Layer them from broad to specific:</p>
+
+  <ul>
+    <li><strong>Behavioral constraints</strong> &mdash; Tone, style, verbosity</li>
+    <li><strong>Domain constraints</strong> &mdash; Only answer within your expertise</li>
+    <li><strong>Safety constraints</strong> &mdash; Never execute destructive actions without confirmation</li>
+    <li><strong>Output constraints</strong> &mdash; Always return valid JSON, never exceed N tokens</li>
+  </ul>
+
+  <pre>Constraints:
+- Only answer questions about infrastructure and DevOps
+- If asked about application code, redirect to the
+  engineering team
+- Never run destructive commands (rm -rf, DROP TABLE,
+  kubectl delete) without explicit user confirmation
+- Keep responses under 500 words unless asked for detail
+- Always include the source of your recommendation</pre>
+
+  <div class="warn">
+    <strong>Warning:</strong> Negative constraints ("never do X") are weaker than positive constraints ("always do Y"). Use both together for reliable guardrails.
+  </div>
+
+  <h2>4. Tool Integration Patterns</h2>
+
+  <p>When your agent has access to tools (APIs, databases, file systems), describe them precisely:</p>
+
+  <pre>Available tools:
+
+search_docs(query: str) -> list[Document]
+  Search the internal documentation. Returns up to
+  10 matching documents with title, content, and URL.
+
+create_ticket(title: str, body: str, priority: str)
+  Create a Jira ticket. Priority must be: low,
+  medium, high, or critical.
+
+run_query(sql: str) -> DataFrame
+  Execute a read-only SQL query against the analytics
+  database. Never run INSERT, UPDATE, or DELETE.</pre>
+
+  <h2>5. Few-Shot Examples</h2>
+
+  <p>Include 2-3 examples of ideal behavior directly in the system prompt. This is the single most effective technique for improving output quality.</p>
+
+  <pre>Example interaction:
+
+User: "The checkout service is returning 503 errors"
+
+Good response:
+"I'll investigate the checkout service. Let me check:
+1. Pod status in the checkout namespace
+2. Recent deployment events
+3. Resource utilization
+
+[Runs kubectl get pods -n checkout]
+
+I can see 2 of 5 pods are in CrashLoopBackOff. The
+last deployment was 15 minutes ago. Let me check the
+logs to identify the root cause."
+
+Bad response:
+"Try restarting the pods."</pre>
+
+  <h2>6. Version Control Your Prompts</h2>
+
+  <p>System prompts are code. Treat them accordingly:</p>
+
+  <ul>
+    <li>Store prompts in version control (Git), not in application config</li>
+    <li>Use Langfuse for prompt versioning and A/B testing in production</li>
+    <li>Tag prompt versions with the model they were tested against</li>
+    <li>Document why each constraint exists (the reason often matters more than the rule)</li>
+    <li>Review prompt changes like code reviews &mdash; small changes can have large behavioral impacts</li>
+  </ul>
+
+  <h2>Resources</h2>
+
+  <ul>
+    <li><a href="https://github.com/OpenSaaSApps/awesome-ai-system-prompts" style="color:#78a9ff">Awesome AI System Prompts</a> &mdash; Real system prompts from production AI tools</li>
+    <li><a href="https://github.com/OpenSaaSApps/system-prompts-and-models-of-ai-tools" style="color:#78a9ff">AI Tool Prompts</a> &mdash; Full prompts from Cursor, Devin, Windsurf</li>
+    <li><a href="http://72.61.244.208:3003" style="color:#78a9ff">Langfuse</a> &mdash; Prompt management and versioning (live)</li>
+  </ul>
+</div>
