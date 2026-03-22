@@ -1,0 +1,678 @@
+{
+  "@context": "https://schema.org",
+  "taxonomyVocabularies": [
+    {
+      "name": "Software Category",
+      "description": "Software classification based on G2/Gartner categories, mapped to schema.org/SoftwareApplication",
+      "schemaType": "SoftwareApplication",
+      "categories": [
+        {
+          "name": "AI & Machine Learning",
+          "children": [
+            "AI Agents Platform",
+            "AI Chatbot",
+            "AI Code Assistant",
+            "AI Content Generator",
+            "AI Data Analytics",
+            "AI Image Generator",
+            "AI Meeting Assistant",
+            "AI Search",
+            "AI Video Generator",
+            "AI Voice Generator",
+            "AI Writing Assistant",
+            "Agentic AI Platform",
+            "Agentic Analytics",
+            "Computer Vision",
+            "Conversational AI",
+            "Deep Learning",
+            "Generative AI",
+            "LLM Ops",
+            "Machine Learning Platform",
+            "MLOps",
+            "Natural Language Processing",
+            "Predictive Analytics",
+            "Prompt Management",
+            "RAG Platform",
+            "Recommendation Engine",
+            "Speech Recognition",
+            "Text Analytics",
+            "Vector Database"
+          ]
+        },
+        {
+          "name": "Development & DevOps",
+          "children": [
+            "API Management",
+            "API Gateway",
+            "Application Performance Monitoring",
+            "CI/CD",
+            "Cloud IDE",
+            "Code Review",
+            "Container Management",
+            "Container Registry",
+            "Database Management",
+            "DevOps Platform",
+            "Feature Flag",
+            "Git Repository",
+            "Infrastructure as Code",
+            "Kubernetes Management",
+            "Load Testing",
+            "Log Management",
+            "Low-Code Platform",
+            "Microservices",
+            "No-Code Platform",
+            "Observability",
+            "PaaS",
+            "Serverless",
+            "Source Code Management",
+            "Static Analysis",
+            "Test Automation",
+            "Version Control"
+          ]
+        },
+        {
+          "name": "Security & Compliance",
+          "children": [
+            "API Security",
+            "Application Security",
+            "Cloud Security",
+            "Compliance Management",
+            "Data Loss Prevention",
+            "Endpoint Security",
+            "GRC",
+            "Identity & Access Management",
+            "Network Security",
+            "Password Manager",
+            "Penetration Testing",
+            "SIEM",
+            "Single Sign-On",
+            "Threat Intelligence",
+            "Vulnerability Management",
+            "Zero Trust"
+          ]
+        },
+        {
+          "name": "Data & Analytics",
+          "children": [
+            "Business Intelligence",
+            "Data Catalog",
+            "Data Engineering",
+            "Data Governance",
+            "Data Integration",
+            "Data Lake",
+            "Data Pipeline",
+            "Data Quality",
+            "Data Visualization",
+            "Data Warehouse",
+            "Database",
+            "ETL",
+            "Graph Database",
+            "Real-Time Analytics",
+            "Reverse ETL",
+            "Semantic Layer",
+            "Stream Processing",
+            "Time Series Database"
+          ]
+        },
+        {
+          "name": "Cloud Infrastructure",
+          "children": [
+            "Backup & Recovery",
+            "CDN",
+            "Cloud Hosting",
+            "Cloud Management",
+            "Cloud Migration",
+            "Cloud Storage",
+            "Dedicated Server",
+            "DNS",
+            "Domain Registration",
+            "Edge Computing",
+            "GPU Cloud",
+            "Hybrid Cloud",
+            "IaaS",
+            "Managed Hosting",
+            "Multi-Cloud",
+            "Object Storage",
+            "SSL Certificate",
+            "VPN",
+            "VPS"
+          ]
+        },
+        {
+          "name": "CRM & Sales",
+          "children": [
+            "Account-Based Marketing",
+            "Configure Price Quote",
+            "Contact Management",
+            "Conversation Intelligence",
+            "CRM",
+            "Customer Data Platform",
+            "Lead Generation",
+            "Lead Scoring",
+            "Revenue Intelligence",
+            "Sales Acceleration",
+            "Sales Enablement",
+            "Sales Engagement",
+            "Sales Forecasting",
+            "Sales Intelligence"
+          ]
+        },
+        {
+          "name": "Marketing",
+          "children": [
+            "A/B Testing",
+            "Advertising",
+            "Affiliate Marketing",
+            "Content Management",
+            "Content Marketing",
+            "Customer Journey Analytics",
+            "Digital Asset Management",
+            "Email Marketing",
+            "Influencer Marketing",
+            "Marketing Automation",
+            "Marketing Analytics",
+            "SEO",
+            "Social Media Management",
+            "Web Analytics"
+          ]
+        },
+        {
+          "name": "HR & People",
+          "children": [
+            "Applicant Tracking",
+            "Employee Engagement",
+            "HR Management",
+            "Learning Management",
+            "Onboarding",
+            "Payroll",
+            "Performance Management",
+            "Recruiting",
+            "Talent Management",
+            "Time & Attendance",
+            "Workforce Management"
+          ]
+        },
+        {
+          "name": "Collaboration & Productivity",
+          "children": [
+            "Business Messaging",
+            "Document Management",
+            "Enterprise Search",
+            "File Sharing",
+            "Knowledge Management",
+            "Meeting",
+            "Note Taking",
+            "Online Whiteboard",
+            "Project Management",
+            "Task Management",
+            "Team Collaboration",
+            "Video Conferencing",
+            "Wiki",
+            "Workflow Automation"
+          ]
+        },
+        {
+          "name": "Finance & Operations",
+          "children": [
+            "Accounting",
+            "Billing & Invoicing",
+            "Budgeting & Forecasting",
+            "ERP",
+            "Expense Management",
+            "Financial Planning",
+            "Inventory Management",
+            "Order Management",
+            "Procurement",
+            "Subscription Management",
+            "Supply Chain Management"
+          ]
+        },
+        {
+          "name": "Customer Service",
+          "children": [
+            "Call Center",
+            "Chatbot",
+            "Customer Feedback",
+            "Customer Success",
+            "Help Desk",
+            "IT Service Management",
+            "Knowledge Base",
+            "Live Chat",
+            "Service Desk",
+            "Ticketing System"
+          ]
+        },
+        {
+          "name": "eCommerce",
+          "children": [
+            "B2B eCommerce",
+            "Cart Abandonment",
+            "Checkout Optimization",
+            "Digital Commerce",
+            "Dropshipping",
+            "Marketplace",
+            "Payment Gateway",
+            "Payment Processing",
+            "Product Information Management",
+            "Shopping Cart",
+            "Subscription Commerce"
+          ]
+        },
+        {
+          "name": "Content & Design",
+          "children": [
+            "CMS",
+            "Design Tool",
+            "Digital Experience Platform",
+            "Graphic Design",
+            "Headless CMS",
+            "Image Editing",
+            "Landing Page Builder",
+            "PDF Editor",
+            "Presentation",
+            "Prototyping",
+            "Translation Management",
+            "UI/UX Design",
+            "Video Editing",
+            "Web Design",
+            "Website Builder"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SFIA Skills",
+      "description": "Skills Framework for the Information Age v9, mapped to schema.org/DefinedTerm",
+      "schemaType": "DefinedTerm",
+      "categories": [
+        {
+          "name": "Strategy & Architecture",
+          "children": [
+            {"code": "ITSP", "name": "IT Strategy & Planning", "levels": "5-7"},
+            {"code": "STPL", "name": "Strategic Planning", "levels": "6-7"},
+            {"code": "GOVN", "name": "Governance", "levels": "5-7"},
+            {"code": "IRMG", "name": "Information Management", "levels": "4-7"},
+            {"code": "SCTY", "name": "Information Security", "levels": "3-7"},
+            {"code": "INAN", "name": "Analytics", "levels": "3-7"},
+            {"code": "ARCH", "name": "Solution Architecture", "levels": "5-7"},
+            {"code": "NTDS", "name": "Network Design", "levels": "4-6"},
+            {"code": "INCD", "name": "Information Content Design", "levels": "2-6"},
+            {"code": "METL", "name": "Methods & Tools", "levels": "3-6"},
+            {"code": "EMRG", "name": "Emerging Technology Monitoring", "levels": "4-6"},
+            {"code": "BUAN", "name": "Business Analysis", "levels": "3-6"},
+            {"code": "KNOW", "name": "Knowledge Management", "levels": "3-6"},
+            {"code": "DTAN", "name": "Data Analysis", "levels": "2-6"},
+            {"code": "DENG", "name": "Data Engineering", "levels": "3-6"}
+          ]
+        },
+        {
+          "name": "Change & Transformation",
+          "children": [
+            {"code": "POMG", "name": "Portfolio Management", "levels": "5-7"},
+            {"code": "PGMG", "name": "Programme Management", "levels": "6-7"},
+            {"code": "PRMG", "name": "Project Management", "levels": "4-7"},
+            {"code": "BENM", "name": "Benefits Management", "levels": "4-6"},
+            {"code": "BPTS", "name": "Business Process Testing", "levels": "3-5"},
+            {"code": "CIPM", "name": "Change Implementation", "levels": "3-6"},
+            {"code": "ORGD", "name": "Organisation Design", "levels": "5-7"},
+            {"code": "BPRE", "name": "Business Process Improvement", "levels": "3-7"},
+            {"code": "FEAS", "name": "Feasibility Assessment", "levels": "4-6"},
+            {"code": "REQM", "name": "Requirements Definition", "levels": "2-6"}
+          ]
+        },
+        {
+          "name": "Development & Implementation",
+          "children": [
+            {"code": "SWDN", "name": "Systems Design", "levels": "3-6"},
+            {"code": "PROG", "name": "Programming/Software Development", "levels": "2-6"},
+            {"code": "TEST", "name": "Testing", "levels": "1-6"},
+            {"code": "REAL", "name": "Systems Integration & Build", "levels": "2-6"},
+            {"code": "DLMG", "name": "Release & Deployment", "levels": "3-6"},
+            {"code": "DBDS", "name": "Database Design", "levels": "3-6"},
+            {"code": "HCEV", "name": "User Experience Design", "levels": "2-6"},
+            {"code": "DESN", "name": "Systems Development Management", "levels": "5-7"},
+            {"code": "CFMG", "name": "Configuration Management", "levels": "2-6"},
+            {"code": "RLMT", "name": "Safety Engineering", "levels": "3-7"},
+            {"code": "APTS", "name": "Application Support", "levels": "2-5"},
+            {"code": "HPCC", "name": "High Performance Computing", "levels": "3-6"},
+            {"code": "MLNG", "name": "Machine Learning", "levels": "3-6"},
+            {"code": "SWDV", "name": "Software Design", "levels": "3-6"}
+          ]
+        },
+        {
+          "name": "Delivery & Operations",
+          "children": [
+            {"code": "SLMO", "name": "Service Level Management", "levels": "3-7"},
+            {"code": "AVMT", "name": "Availability Management", "levels": "3-6"},
+            {"code": "CPMG", "name": "Capacity Management", "levels": "3-6"},
+            {"code": "USUP", "name": "Incident Management", "levels": "2-5"},
+            {"code": "PBMG", "name": "Problem Management", "levels": "3-5"},
+            {"code": "ITOP", "name": "IT Infrastructure", "levels": "1-5"},
+            {"code": "DBAD", "name": "Database Administration", "levels": "2-5"},
+            {"code": "NTAS", "name": "Network Support", "levels": "2-4"},
+            {"code": "SCAD", "name": "Security Administration", "levels": "2-6"},
+            {"code": "VUAS", "name": "Vulnerability Assessment", "levels": "3-6"},
+            {"code": "PENT", "name": "Penetration Testing", "levels": "3-6"},
+            {"code": "THIN", "name": "Threat Intelligence", "levels": "4-6"},
+            {"code": "SINT", "name": "Security Operations", "levels": "3-6"},
+            {"code": "DCMA", "name": "Digital Forensics", "levels": "3-6"}
+          ]
+        },
+        {
+          "name": "Skills & Quality",
+          "children": [
+            {"code": "LEDA", "name": "Learning Design & Development", "levels": "3-6"},
+            {"code": "ETDL", "name": "Learning Delivery", "levels": "2-6"},
+            {"code": "TMCR", "name": "Competency Assessment", "levels": "3-6"},
+            {"code": "QUMG", "name": "Quality Management", "levels": "3-7"},
+            {"code": "QUAS", "name": "Quality Assurance", "levels": "3-6"},
+            {"code": "PDSV", "name": "Professional Development", "levels": "4-7"},
+            {"code": "RESO", "name": "Resourcing", "levels": "3-6"}
+          ]
+        },
+        {
+          "name": "Relationships & Engagement",
+          "children": [
+            {"code": "RLMG", "name": "Stakeholder Relationship Management", "levels": "4-7"},
+            {"code": "SUPP", "name": "Supplier Management", "levels": "3-7"},
+            {"code": "SCON", "name": "Sales Support", "levels": "3-6"},
+            {"code": "ITMG", "name": "IT Management", "levels": "5-7"},
+            {"code": "FACO", "name": "Financial Management", "levels": "4-7"},
+            {"code": "DEMM", "name": "Demand Management", "levels": "4-6"},
+            {"code": "MKTG", "name": "Marketing", "levels": "3-6"},
+            {"code": "SSUP", "name": "Service Support", "levels": "2-5"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Skill Level",
+      "description": "SFIA responsibility levels 1-7, mapped to schema.org/DefinedTerm",
+      "schemaType": "DefinedTerm",
+      "categories": [
+        {"code": "L1", "name": "Follow", "description": "Works under close direction. Uses standard procedures."},
+        {"code": "L2", "name": "Assist", "description": "Works under routine direction. Uses standard practices."},
+        {"code": "L3", "name": "Apply", "description": "Works under general direction. Uses discretion in resolving issues."},
+        {"code": "L4", "name": "Enable", "description": "Works under general direction within a clear framework. Substantial personal responsibility."},
+        {"code": "L5", "name": "Ensure, Advise", "description": "Works under broad direction. Full accountability for technical work."},
+        {"code": "L6", "name": "Initiate, Influence", "description": "Has defined authority and accountability for significant area of work."},
+        {"code": "L7", "name": "Set Strategy, Inspire", "description": "Leads at the highest organizational level. Sets strategy and inspires."}
+      ]
+    },
+    {
+      "name": "Job Role",
+      "description": "IT & digital job roles mapped to SFIA skills profiles, using schema.org/Occupation",
+      "schemaType": "Occupation",
+      "categories": [
+        {
+          "name": "Engineering",
+          "children": [
+            "Software Engineer",
+            "Frontend Developer",
+            "Backend Developer",
+            "Full Stack Developer",
+            "Mobile Developer",
+            "DevOps Engineer",
+            "Site Reliability Engineer",
+            "Platform Engineer",
+            "Cloud Engineer",
+            "Data Engineer",
+            "ML Engineer",
+            "AI Engineer",
+            "QA Engineer",
+            "Test Automation Engineer",
+            "Security Engineer",
+            "Infrastructure Engineer",
+            "Database Administrator",
+            "Network Engineer",
+            "Embedded Systems Engineer"
+          ]
+        },
+        {
+          "name": "Architecture & Design",
+          "children": [
+            "Solutions Architect",
+            "Enterprise Architect",
+            "Cloud Architect",
+            "Security Architect",
+            "Data Architect",
+            "UX Designer",
+            "UI Designer",
+            "Product Designer",
+            "UX Researcher"
+          ]
+        },
+        {
+          "name": "Data & Analytics",
+          "children": [
+            "Data Scientist",
+            "Data Analyst",
+            "Business Analyst",
+            "Business Intelligence Analyst",
+            "Analytics Engineer",
+            "Machine Learning Researcher",
+            "AI Researcher"
+          ]
+        },
+        {
+          "name": "Management",
+          "children": [
+            "Engineering Manager",
+            "Product Manager",
+            "Project Manager",
+            "Programme Manager",
+            "Delivery Manager",
+            "Scrum Master",
+            "Agile Coach",
+            "CTO",
+            "CIO",
+            "CISO",
+            "VP Engineering",
+            "Head of Product"
+          ]
+        },
+        {
+          "name": "Operations",
+          "children": [
+            "IT Operations Manager",
+            "Service Desk Analyst",
+            "Systems Administrator",
+            "IT Support Specialist",
+            "Incident Manager",
+            "Change Manager",
+            "Release Manager"
+          ]
+        },
+        {
+          "name": "Security",
+          "children": [
+            "Security Analyst",
+            "Penetration Tester",
+            "SOC Analyst",
+            "Threat Intelligence Analyst",
+            "GRC Analyst",
+            "Security Consultant",
+            "Digital Forensics Analyst"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Organization Type",
+      "description": "Organization classification, mapped to schema.org/Organization subtypes",
+      "schemaType": "Organization",
+      "categories": [
+        {
+          "name": "By Structure",
+          "children": [
+            "Corporation",
+            "Startup",
+            "SME",
+            "Enterprise",
+            "Non-Profit",
+            "Government",
+            "Educational Institution",
+            "Research Institute",
+            "Open Source Foundation",
+            "Consortium"
+          ]
+        },
+        {
+          "name": "By Industry",
+          "children": [
+            "Technology",
+            "Financial Services",
+            "Healthcare",
+            "Manufacturing",
+            "Retail",
+            "Education",
+            "Media & Entertainment",
+            "Telecommunications",
+            "Energy & Utilities",
+            "Transportation & Logistics",
+            "Real Estate",
+            "Legal",
+            "Consulting",
+            "Agriculture"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Content Type",
+      "description": "Content classification, mapped to schema.org/CreativeWork subtypes",
+      "schemaType": "CreativeWork",
+      "categories": [
+        "Prompt",
+        "System Prompt",
+        "Skill",
+        "Tool",
+        "Agent",
+        "API",
+        "Framework",
+        "Tutorial",
+        "Guide",
+        "Reference",
+        "Template",
+        "Workflow",
+        "Integration",
+        "Plugin",
+        "Component",
+        "Dataset",
+        "Model",
+        "Benchmark",
+        "Case Study",
+        "Documentation"
+      ]
+    },
+    {
+      "name": "Place",
+      "description": "Geographic classification, mapped to schema.org/Place",
+      "schemaType": "Place",
+      "categories": [
+        {
+          "name": "Americas",
+          "children": ["United States", "Canada", "Brazil", "Mexico", "Argentina", "Colombia", "Chile"]
+        },
+        {
+          "name": "Europe",
+          "children": ["United Kingdom", "Germany", "France", "Netherlands", "Sweden", "Switzerland", "Ireland", "Spain", "Italy", "Poland", "Portugal", "Finland", "Denmark", "Norway", "Belgium", "Austria", "Czech Republic"]
+        },
+        {
+          "name": "Asia Pacific",
+          "children": ["India", "Japan", "China", "South Korea", "Australia", "Singapore", "Indonesia", "Vietnam", "Thailand", "Philippines", "Taiwan", "New Zealand"]
+        },
+        {
+          "name": "Middle East & Africa",
+          "children": ["Israel", "UAE", "Saudi Arabia", "South Africa", "Nigeria", "Kenya", "Egypt", "Turkey"]
+        }
+      ]
+    },
+    {
+      "name": "Tags",
+      "description": "Wikipedia-sourced topic tags for content classification",
+      "schemaType": "DefinedTerm",
+      "categories": [
+        {
+          "name": "AI & Computing",
+          "children": [
+            "Artificial intelligence", "Machine learning", "Deep learning", "Neural network",
+            "Natural language processing", "Computer vision", "Reinforcement learning",
+            "Transformer (machine learning model)", "Large language model", "Generative artificial intelligence",
+            "Prompt engineering", "Retrieval-augmented generation", "AI agent",
+            "Multi-agent system", "Autonomous agent", "Intelligent agent",
+            "Knowledge graph", "Semantic web", "Ontology (information science)",
+            "Vector database", "Embedding", "Attention mechanism",
+            "Fine-tuning (machine learning)", "Transfer learning", "Few-shot learning"
+          ]
+        },
+        {
+          "name": "Software Engineering",
+          "children": [
+            "Software development", "Agile software development", "DevOps",
+            "Continuous integration", "Continuous delivery", "Microservices",
+            "Application programming interface", "REST", "GraphQL",
+            "Containerization", "Docker (software)", "Kubernetes",
+            "Infrastructure as code", "Terraform (software)", "GitOps",
+            "Software testing", "Test-driven development", "Code review",
+            "Version control", "Git", "Open-source software",
+            "Software architecture", "Design pattern", "Refactoring"
+          ]
+        },
+        {
+          "name": "Data & Analytics",
+          "children": [
+            "Data science", "Data engineering", "Data warehouse",
+            "Data lake", "ETL", "Data pipeline",
+            "Business intelligence", "Data visualization", "Dashboard (business)",
+            "SQL", "NoSQL", "Apache Kafka",
+            "Apache Spark", "Data governance", "Data quality",
+            "Master data management", "Metadata", "Data lineage"
+          ]
+        },
+        {
+          "name": "Cloud & Infrastructure",
+          "children": [
+            "Cloud computing", "Amazon Web Services", "Microsoft Azure",
+            "Google Cloud Platform", "Serverless computing", "Platform as a service",
+            "Infrastructure as a service", "Content delivery network", "Load balancing",
+            "Edge computing", "Virtual private server", "Object storage",
+            "Distributed computing", "High availability", "Fault tolerance"
+          ]
+        },
+        {
+          "name": "Security",
+          "children": [
+            "Information security", "Cybersecurity", "Zero trust security model",
+            "Authentication", "Authorization", "OAuth",
+            "OpenID Connect", "Single sign-on", "Multi-factor authentication",
+            "Encryption", "Public-key cryptography", "Digital signature",
+            "Penetration test", "Vulnerability (computing)", "OWASP",
+            "Security information and event management", "Firewall (computing)", "Intrusion detection system"
+          ]
+        },
+        {
+          "name": "Business & Management",
+          "children": [
+            "Project management", "Product management", "Business analysis",
+            "Digital transformation", "Enterprise architecture", "IT governance",
+            "ITIL", "Six Sigma", "Lean manufacturing",
+            "Business process", "Workflow", "Automation",
+            "Customer relationship management", "Enterprise resource planning", "Supply chain management",
+            "Software as a service", "Subscription business model", "Freemium"
+          ]
+        },
+        {
+          "name": "Compliance & Governance",
+          "children": [
+            "General Data Protection Regulation", "California Consumer Privacy Act",
+            "SOC 2", "ISO 27001", "HIPAA",
+            "PCI DSS", "Sarbanes-Oxley Act", "AI regulation",
+            "Responsible AI", "Algorithmic bias", "AI ethics",
+            "Data protection", "Privacy by design", "Right to be forgotten"
+          ]
+        }
+      ]
+    }
+  ]
+}
