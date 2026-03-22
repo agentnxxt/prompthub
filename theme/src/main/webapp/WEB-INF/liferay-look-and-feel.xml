@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE look-and-feel PUBLIC "-//Liferay//DTD Look and Feel 7.4.0//EN" "http://www.liferay.com/dtd/liferay-look-and-feel_7_4_0.dtd">
+
+<look-and-feel>
+  <compatibility>
+    <version>7.4.3+</version>
+  </compatibility>
+  <theme id="prompthub-theme" name="PromptHub">
+    <root-path>/</root-path>
+    <templates-path>${root-path}/templates</templates-path>
+    <css-path>${root-path}/css</css-path>
+    <images-path>${root-path}/images</images-path>
+    <javascript-path>${root-path}/js</javascript-path>
+    <template-extension>ftl</template-extension>
+    <settings>
+      <setting configurable="true" key="show-search" type="checkbox" value="true" />
+      <setting configurable="true" key="show-categories" type="checkbox" value="true" />
+    </settings>
+    <portlet-decorator id="barebone" name="Barebone">
+      <default-portlet-decorator>false</default-portlet-decorator>
+      <portlet-decorator-css-class>portlet-barebone</portlet-decorator-css-class>
+    </portlet-decorator>
+    <portlet-decorator id="borderless" name="Borderless">
+      <default-portlet-decorator>false</default-portlet-decorator>
+      <portlet-decorator-css-class>portlet-borderless</portlet-decorator-css-class>
+    </portlet-decorator>
+    <portlet-decorator id="decorate" name="Decorate">
+      <default-portlet-decorator>true</default-portlet-decorator>
+      <portlet-decorator-css-class>portlet-decorate</portlet-decorator-css-class>
+    </portlet-decorator>
+  </theme>
+</look-and-feel>

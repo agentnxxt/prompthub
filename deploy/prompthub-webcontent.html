@@ -1,0 +1,307 @@
+<!-- PromptHub - AgentNXXT Content Portal - IBM Carbon Theme -->
+<!-- Deploy as: Liferay > Web Content > Add > Basic Web Content > Source Editor -->
+
+<link rel="stylesheet" href="https://unpkg.com/@carbon/styles@1/css/styles.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+
+<style>
+/* Carbon g100 (dark) overrides */
+.ph-wrap { font-family: 'IBM Plex Sans', sans-serif; background: #161616; color: #f4f4f4; min-height: 100vh; }
+.ph-container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+
+/* Hero */
+.ph-hero { background: linear-gradient(135deg, #161616 0%, #1a1a2e 50%, #0f62fe10 100%); padding: 4rem 0 3rem; text-align: center; border-bottom: 1px solid #393939; }
+.ph-hero h1 { font-size: 2.625rem; font-weight: 600; margin-bottom: 0.75rem; letter-spacing: -0.01em; color: #f4f4f4; }
+.ph-hero p { font-size: 1.125rem; color: #c6c6c6; max-width: 36rem; margin: 0 auto 2rem; line-height: 1.5; }
+
+/* Search - Carbon style */
+.ph-search { max-width: 36rem; margin: 0 auto; position: relative; }
+.ph-search input {
+  width: 100%; padding: 0.875rem 1rem; padding-left: 3rem;
+  background: #262626; border: none; border-bottom: 1px solid #6f6f6f;
+  color: #f4f4f4; font-size: 0.875rem; font-family: 'IBM Plex Sans', sans-serif;
+  outline: none; box-sizing: border-box; transition: border-color 0.15s;
+}
+.ph-search input:focus { border-bottom-color: #0f62fe; }
+.ph-search input::placeholder { color: #6f6f6f; }
+.ph-search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #c6c6c6; font-size: 1rem; }
+
+/* Category Tabs - Carbon style */
+.ph-tabs { display: flex; gap: 0; border-bottom: 1px solid #393939; margin-top: 1.5rem; justify-content: center; flex-wrap: wrap; }
+.ph-tab {
+  padding: 0.75rem 1rem; background: none; border: none; border-bottom: 2px solid transparent;
+  color: #c6c6c6; font-size: 0.875rem; font-weight: 400; cursor: pointer;
+  font-family: 'IBM Plex Sans', sans-serif; transition: all 0.15s; white-space: nowrap;
+}
+.ph-tab:hover { color: #f4f4f4; background: #262626; }
+.ph-tab.on { color: #f4f4f4; border-bottom-color: #0f62fe; font-weight: 600; }
+
+/* Card Grid - Carbon tile pattern */
+.ph-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: 1px; padding: 2rem 0 3rem; background: #262626; }
+.ph-card {
+  background: #262626; padding: 1.5rem; transition: all 0.15s; cursor: pointer;
+  text-decoration: none; display: block; border: 1px solid transparent; position: relative;
+}
+.ph-card:hover { background: #353535; }
+.ph-card:active { background: #393939; }
+.ph-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+  background: #0f62fe; transition: width 0.2s;
+}
+.ph-card:hover::after { width: 100%; }
+.ph-card h3 { font-size: 0.875rem; font-weight: 600; color: #f4f4f4; margin: 0 0 0.5rem; line-height: 1.3; }
+.ph-card p { color: #c6c6c6; font-size: 0.75rem; line-height: 1.5; margin: 0; }
+
+/* Tags - Carbon tag style */
+.ph-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+.ph-tag {
+  padding: 0.125rem 0.5rem; background: #393939; border-radius: 1000px;
+  color: #c6c6c6; font-size: 0.6875rem; font-weight: 400; font-family: 'IBM Plex Sans', sans-serif;
+}
+.ph-tag.blue { background: #0f62fe20; color: #78a9ff; }
+.ph-tag.teal { background: #00539a20; color: #3ddbd9; }
+.ph-tag.green { background: #19853620; color: #42be65; }
+.ph-tag.orange { background: #8a3c0020; color: #ff832b; }
+.ph-tag.purple { background: #6929c420; color: #be95ff; }
+.ph-tag.pink { background: #9f195620; color: #ff7eb6; }
+.ph-tag.live { background: #19853620; color: #42be65; border: 1px solid #42be6540; }
+
+/* Icon badges */
+.ph-ico {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2rem; height: 2rem; border-radius: 0.25rem; font-size: 0.875rem;
+  margin-right: 0.75rem; vertical-align: middle; flex-shrink: 0;
+}
+.ph-ico.pr { background: #0f62fe20; }
+.ph-ico.sk { background: #00539a20; }
+.ph-ico.to { background: #19853620; }
+.ph-ico.ag { background: #8a3c0020; }
+.ph-ico.ap { background: #6929c420; }
+.ph-ico.fw { background: #9f195620; }
+
+/* Header row */
+.ph-card-head { display: flex; align-items: center; margin-bottom: 0.5rem; }
+
+/* Stats bar */
+.ph-stats { display: flex; gap: 1.5rem; justify-content: center; padding: 1.5rem 0; color: #c6c6c6; font-size: 0.875rem; }
+.ph-stat-num { font-size: 1.75rem; font-weight: 600; color: #0f62fe; display: block; font-family: 'IBM Plex Mono', monospace; }
+.ph-stat-label { font-size: 0.75rem; color: #6f6f6f; text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* Footer */
+.ph-footer { border-top: 1px solid #393939; padding: 1.5rem 0; text-align: center; color: #6f6f6f; font-size: 0.75rem; }
+
+/* Responsive */
+@media (max-width: 672px) {
+  .ph-hero h1 { font-size: 1.75rem; }
+  .ph-grid { grid-template-columns: 1fr; }
+  .ph-stats { flex-wrap: wrap; gap: 1rem; }
+  .ph-tabs { justify-content: flex-start; overflow-x: auto; }
+}
+</style>
+
+<div class="ph-wrap">
+  <div class="ph-hero">
+    <div class="ph-container">
+      <h1>AgentNXXT Hub</h1>
+      <p>Prompts, Skills, Tools, Agents, APIs &amp; Frameworks for building production AI systems.</p>
+
+      <div class="ph-stats">
+        <div><span class="ph-stat-num">25</span><span class="ph-stat-label">Repos</span></div>
+        <div><span class="ph-stat-num">700+</span><span class="ph-stat-label">Skills</span></div>
+        <div><span class="ph-stat-num">16</span><span class="ph-stat-label">Services</span></div>
+        <div><span class="ph-stat-num">6</span><span class="ph-stat-label">Categories</span></div>
+      </div>
+
+      <div class="ph-search">
+        <span class="ph-search-icon">&#128269;</span>
+        <input type="text" id="phQ" placeholder="Search prompts, skills, tools, agents..." oninput="phFilter(this.value)" />
+      </div>
+
+      <div class="ph-tabs">
+        <button class="ph-tab on" onclick="phCat('all',this)">All</button>
+        <button class="ph-tab" onclick="phCat('pr',this)">Prompts</button>
+        <button class="ph-tab" onclick="phCat('sk',this)">Skills</button>
+        <button class="ph-tab" onclick="phCat('to',this)">Tools</button>
+        <button class="ph-tab" onclick="phCat('ag',this)">Agents</button>
+        <button class="ph-tab" onclick="phCat('ap',this)">APIs</button>
+        <button class="ph-tab" onclick="phCat('fw',this)">Frameworks</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ph-container">
+    <div class="ph-grid" id="phG">
+
+      <!-- PROMPTS -->
+      <a class="ph-card" data-c="pr" href="https://github.com/OpenSaaSApps/prompts.chat" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico pr">&#128172;</span><h3>Prompts.chat</h3></div>
+        <p>153k+ star community prompt collection for ChatGPT, Claude, and all LLMs.</p>
+        <div class="ph-tags"><span class="ph-tag blue">General</span><span class="ph-tag blue">Community</span><span class="ph-tag">153k stars</span></div>
+      </a>
+
+      <a class="ph-card" data-c="pr" href="https://github.com/OpenSaaSApps/awesome-prompts" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico pr">&#9889;</span><h3>Awesome Prompts</h3></div>
+        <p>Top-rated GPT Store prompts powering production applications.</p>
+        <div class="ph-tags"><span class="ph-tag blue">GPT Store</span><span class="ph-tag blue">Production</span></div>
+      </a>
+
+      <a class="ph-card" data-c="pr" href="https://github.com/OpenSaaSApps/awesome-ai-system-prompts" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico pr">&#128736;</span><h3>System Prompts</h3></div>
+        <p>System prompts from v0, Manus, ChatGPT, Claude Code, and more.</p>
+        <div class="ph-tags"><span class="ph-tag blue">v0</span><span class="ph-tag blue">Manus</span><span class="ph-tag blue">System</span></div>
+      </a>
+
+      <a class="ph-card" data-c="pr" href="https://github.com/OpenSaaSApps/system-prompts-and-models-of-ai-tools" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico pr">&#128273;</span><h3>AI Tool Prompts</h3></div>
+        <p>Full system prompts from Cursor, Devin, Windsurf, Lovable, Replit, 20+ agents.</p>
+        <div class="ph-tags"><span class="ph-tag blue">Cursor</span><span class="ph-tag blue">Devin</span><span class="ph-tag blue">Windsurf</span></div>
+      </a>
+
+      <!-- SKILLS -->
+      <a class="ph-card" data-c="sk" href="https://github.com/OpenSaaSApps/skills" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico sk">&#127919;</span><h3>Anthropic Skills</h3></div>
+        <p>Official SKILL.md skills for Claude Code. The standard for agent skill definitions.</p>
+        <div class="ph-tags"><span class="ph-tag teal">Official</span><span class="ph-tag teal">SKILL.md</span></div>
+      </a>
+
+      <a class="ph-card" data-c="sk" href="https://github.com/OpenSaaSApps/claude-skills" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico sk">&#128640;</span><h3>192+ Claude Skills</h3></div>
+        <p>Engineering, marketing, product, compliance, advisory skills for 8+ agents.</p>
+        <div class="ph-tags"><span class="ph-tag teal">192+</span><span class="ph-tag teal">Multi-agent</span></div>
+      </a>
+
+      <a class="ph-card" data-c="sk" href="https://github.com/OpenSaaSApps/awesome-agent-skills" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico sk">&#127775;</span><h3>500+ Agent Skills</h3></div>
+        <p>VoltAgent collection. Claude Code, Codex, Gemini CLI, Cursor compatible.</p>
+        <div class="ph-tags"><span class="ph-tag teal">500+</span><span class="ph-tag teal">VoltAgent</span></div>
+      </a>
+
+      <a class="ph-card" data-c="sk" href="https://github.com/agentnxxt/agent-skills" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico sk">&#128171;</span><h3>AgentNXXT Skills</h3></div>
+        <p>Custom CrewAI, Langflow, AutoGPT skills. Research, analysis, code review.</p>
+        <div class="ph-tags"><span class="ph-tag teal">Custom</span><span class="ph-tag teal">CrewAI</span></div>
+      </a>
+
+      <a class="ph-card" data-c="sk" href="https://github.com/OpenSaaSApps/claude-skills-marketplace" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico sk">&#128722;</span><h3>Skills Marketplace</h3></div>
+        <p>Git automation, testing, and code review skills for engineering workflows.</p>
+        <div class="ph-tags"><span class="ph-tag teal">Git</span><span class="ph-tag teal">Testing</span></div>
+      </a>
+
+      <!-- TOOLS -->
+      <a class="ph-card" data-c="to" href="https://github.com/OpenSaaSApps/composio" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico to">&#128295;</span><h3>Composio</h3></div>
+        <p>Connect AI agents to 200+ apps — GitHub, Slack, Jira, Google, more.</p>
+        <div class="ph-tags"><span class="ph-tag green">200+ Apps</span><span class="ph-tag">MIT</span></div>
+      </a>
+
+      <a class="ph-card" data-c="to" href="http://72.61.244.208:5555" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico to">&#127760;</span><h3>LibreTranslate</h3></div>
+        <p>Self-hosted translation API. 11 languages. REST API for agents.</p>
+        <div class="ph-tags"><span class="ph-tag green">Translation</span><span class="ph-tag live">Live</span></div>
+      </a>
+
+      <a class="ph-card" data-c="to" href="http://72.61.244.208:3100" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico to">&#128196;</span><h3>Gotenberg</h3></div>
+        <p>PDF generation API. HTML, Office docs, URLs to PDF.</p>
+        <div class="ph-tags"><span class="ph-tag green">PDF</span><span class="ph-tag live">Live</span></div>
+      </a>
+
+      <a class="ph-card" data-c="to" href="http://72.61.244.208:3200" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico to">&#128260;</span><h3>ConvertX</h3></div>
+        <p>File converter. 100+ formats — docs, images, audio, video.</p>
+        <div class="ph-tags"><span class="ph-tag green">100+ Formats</span><span class="ph-tag live">Live</span></div>
+      </a>
+
+      <a class="ph-card" data-c="to" href="http://72.61.244.208:8888" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico to">&#128247;</span><h3>ImgProxy</h3></div>
+        <p>Image processing proxy. Resize, crop, watermark on the fly.</p>
+        <div class="ph-tags"><span class="ph-tag green">Images</span><span class="ph-tag live">Live</span></div>
+      </a>
+
+      <!-- AGENTS -->
+      <a class="ph-card" data-c="ag" href="https://github.com/agentnxxt/agentkube" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico ag">&#9881;</span><h3>AgentKube</h3></div>
+        <p>AI agent control plane. Multi-agent systems with crypto verification.</p>
+        <div class="ph-tags"><span class="ph-tag orange">Control Plane</span><span class="ph-tag">Apache 2.0</span></div>
+      </a>
+
+      <a class="ph-card" data-c="ag" href="https://github.com/OpenSaaSApps/agentcrew" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico ag">&#128101;</span><h3>AgentCrew</h3></div>
+        <p>CrewAI framework. Collaborative AI agent teams with roles and tools.</p>
+        <div class="ph-tags"><span class="ph-tag orange">CrewAI</span><span class="ph-tag">MIT</span></div>
+      </a>
+
+      <a class="ph-card" data-c="ag" href="https://github.com/OpenSaaSApps/agentgpt" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico ag">&#129302;</span><h3>AutoGPT</h3></div>
+        <p>Autonomous AI agent platform. Self-running agents at scale.</p>
+        <div class="ph-tags"><span class="ph-tag orange">Autonomous</span><span class="ph-tag">177k stars</span></div>
+      </a>
+
+      <a class="ph-card" data-c="ag" href="https://github.com/OpenSaaSApps/awesome-ai-agents-2026" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico ag">&#128218;</span><h3>Agent Directory 2026</h3></div>
+        <p>300+ AI agent resources updated monthly.</p>
+        <div class="ph-tags"><span class="ph-tag orange">300+</span><span class="ph-tag orange">2026</span></div>
+      </a>
+
+      <!-- APIs -->
+      <a class="ph-card" data-c="ap" href="https://llmgateway.agnxxt.com:4000" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico ap">&#128279;</span><h3>LLM Gateway</h3></div>
+        <p>LiteLLM proxy. Unified API for 100+ LLM providers.</p>
+        <div class="ph-tags"><span class="ph-tag purple">LiteLLM</span><span class="ph-tag live">Live</span></div>
+      </a>
+
+      <a class="ph-card" data-c="ap" href="https://agentflow.agnxxt.com:7860" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico ap">&#127912;</span><h3>AgentFlow</h3></div>
+        <p>Langflow visual builder. Drag-and-drop AI workflows.</p>
+        <div class="ph-tags"><span class="ph-tag purple">Langflow</span><span class="ph-tag live">Live</span></div>
+      </a>
+
+      <a class="ph-card" data-c="ap" href="http://72.61.244.208:3003" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico ap">&#128200;</span><h3>Langfuse</h3></div>
+        <p>LLM observability. Traces, evals, prompt versioning.</p>
+        <div class="ph-tags"><span class="ph-tag purple">Observability</span><span class="ph-tag live">Live</span></div>
+      </a>
+
+      <a class="ph-card" data-c="ap" href="https://mcpgateway.agnxxt.com:12008" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico ap">&#128268;</span><h3>MCP Gateway</h3></div>
+        <p>Model Context Protocol gateway for AI tools.</p>
+        <div class="ph-tags"><span class="ph-tag purple">MCP</span><span class="ph-tag live">Live</span></div>
+      </a>
+
+      <!-- FRAMEWORKS -->
+      <a class="ph-card" data-c="fw" href="https://github.com/OpenSaaSApps/LibreChat" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico fw">&#128488;</span><h3>LibreChat</h3></div>
+        <p>AI chat interface. Multi-model, plugins, RAG, file uploads.</p>
+        <div class="ph-tags"><span class="ph-tag pink">Chat UI</span><span class="ph-tag">MIT</span></div>
+      </a>
+
+      <a class="ph-card" data-c="fw" href="https://github.com/OpenSaaSApps/spree" target="_blank">
+        <div class="ph-card-head"><span class="ph-ico fw">&#128722;</span><h3>Spree Commerce</h3></div>
+        <p>API-first eCommerce. B2B, marketplace, multi-tenant.</p>
+        <div class="ph-tags"><span class="ph-tag pink">eCommerce</span><span class="ph-tag">BSD-3</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="ph-footer">
+    <div class="ph-container">AgentNXXT Hub &middot; Built with IBM Carbon Design System &middot; Apache 2.0</div>
+  </div>
+</div>
+
+<script>
+function phCat(c, el) {
+  document.querySelectorAll('.ph-tab').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.ph-card').forEach(d => {
+    d.style.display = (c === 'all' || d.dataset.c === c) ? '' : 'none';
+  });
+}
+function phFilter(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.ph-card').forEach(d => {
+    d.style.display = d.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+</script>
